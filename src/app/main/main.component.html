@@ -1,0 +1,243 @@
+<header>
+  <nav id="desktop-nav">
+    <div class="logo"><h3>Kanban Board</h3></div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="#About">About</a></li>
+        <li><a href="#Board">Board</a></li>
+        <li><a href="#Contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<body>
+  <section id="Board">
+    <div class="board_box p-3">
+      <div class="board_box_1 shadow-sm">
+        <div class="header_of_box" style="background-color: rgb(132, 174, 132)">
+          <p class="m-0">Backlog {{this.Id-1}}</p>
+        </div>
+        <div
+          class="d-flex Task_list"
+          style="
+            border: 0.1rem solid rgb(132, 174, 132);
+            background-color: rgba(210, 241, 210, 0.522);
+          "
+          *ngFor="let list of lists"
+        >
+          <p><b>Task Number :</b> {{ list.id }}</p>
+          <p><b>Task :</b> {{ list.Task }}</p>
+          <p><b>Stage :</b> {{ list.stage }}</p>
+          <button
+            class="btn btn-warning"
+            (click)="this.remove(lists.indexOf(list), list.stage)"
+          >
+            Completed
+          </button>
+        </div>
+        <div
+          class="d-flex Task_list"
+          style="
+            border: 0.1rem solid rgb(132, 174, 132);
+            background-color: rgba(210, 241, 210, 0.522);
+          "
+          *ngIf="this.message"
+        >
+          <p style="font-weight: 600; color: green">Add New Task</p>
+          <textarea
+            rows="3"
+            class="form-control"
+            placeholder="Describe Task Here"
+            name="textarea"
+            [(ngModel)]="this.Task"
+          ></textarea>
+          <button class="btn btn-info my-2" (click)="this.submit()">
+            Submit
+          </button>
+        </div>
+        <button
+          class="btn btn-success my-3"
+          style="width: 25%"
+          (click)="this.add()"
+          *ngIf="this.message_2"
+        >
+          Add Task
+        </button>
+      </div>
+      <div class="board_box_1 shadow-sm">
+        <div class="header_of_box" style="background-color: rgb(132, 149, 174)">
+          <p class="m-0">Doing {{this.doing_count}}/{{this.Id-1}}</p>
+        </div>
+        <div
+          class="d-flex Task_list"
+          style="
+            border: 0.1rem solid rgb(132, 149, 174);
+            background-color: rgb(132, 149, 174, 0.522);
+          "
+          *ngFor="let list of list2"
+        >
+          <p><b>Task Number :</b> {{ list.id }}</p>
+          <p><b>Task :</b> {{ list.Task }}</p>
+          <p><b>Stage :</b> {{ list.stage }}</p>
+          <button
+            class="btn btn-warning"
+            (click)="this.remove(lists.indexOf(list), list.stage)"
+          >
+            Completed
+          </button>
+        </div>
+      </div>
+      <div class="board_box_1 shadow-sm">
+        <div class="header_of_box" style="background-color: rgb(174, 140, 132)">
+          <p class="m-0">Review {{this.review_count}}/{{this.Id-1}} </p>
+        </div>
+        <div
+          class="d-flex Task_list"
+          style="
+            border: 0.1rem solid rgb(174, 140, 132);
+            background-color: rgb(174, 140, 132, 0.522);
+          "
+          *ngFor="let list of list3"
+        >
+          <p><b>Task Number :</b> {{ list.id }}</p>
+          <p><b>Task :</b> {{ list.Task }}</p>
+          <p><b>Stage :</b> {{ list.stage }}</p>
+          <button
+            class="btn btn-warning"
+            (click)="this.remove(lists.indexOf(list), list.stage)"
+          >
+            Completed
+          </button>
+        </div>
+      </div>
+      <div class="board_box_1 shadow-sm">
+        <div class="header_of_box" style="background-color: rgb(174, 173, 132)">
+          <p class="m-0">Done {{this.done_count}}/{{this.Id-1}}</p>
+        </div>
+        <div
+          class="d-flex Task_list"
+          style="
+            border: 0.1rem solid rgb(174, 173, 132);
+            background-color: rgb(174, 173, 132, 0.522);
+          "
+          *ngFor="let list of list4"
+        >
+          <p><b>Task Number :</b> {{ list.id }}</p>
+          <p><b>Task :</b> {{ list.Task }}</p>
+          <p><b>Stage :</b> {{ list.stage }}</p>
+          <button
+            class="btn btn-warning"
+            (click)="this.remove(lists.indexOf(list), list.stage)"
+          >
+            Completed
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="About">
+    <div class="p-3 about_container">
+      <h3 class="p-3">What is Kanban ?</h3>
+      <p class="p-3 mb-0">
+        Kanban is a visual workflow management technique that is used in
+        software development, project management, and manufacturing, among other
+        disciplines, to increase productivity, efficiency, and task monitoring.
+        The name comes from the Japanese word "kanban," which's meaning is
+        "visual card" or "signboard."
+      </p>
+      <h3 class="p-3">Key Concepts of Kanban</h3>
+      <ol class="">
+        <li>
+          Visualize Workflow:
+          <ul>
+            <li>
+              Kanban uses a board (physical or digital) with columns
+              representing stages in a process.
+            </li>
+            <li>
+              Cards or tasks move across the columns, representing their
+              progress.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Limit Work in Progress (WIP):
+          <ul>
+            <li>
+              Restrict the number of tasks that can be in a particular stage at
+              the same time.
+            </li>
+            <li>
+              Helps prevent bottlenecks and ensures tasks are completed
+              efficiently.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Focus on Flow:
+          <ul>
+            <li>Emphasizes a smooth and continuous flow of work.</li>
+            <li>Ensures tasks move steadily from start to finish.</li>
+          </ul>
+        </li>
+        <li>
+          Make Process Policies Explicit:
+          <ul>
+            <li>
+              Clearly define rules for how tasks are prioritized and moved
+              between stages.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Continuous Improvement:
+          <ul>
+            <li>
+              Teams regularly review workflows to identify inefficiencies and
+              make adjustments.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <section id="Contact">
+    <img
+          src="./assets/FFAU9533.JPG"
+          alt="My image"
+          class="MyImage shadow-lg"
+        />
+    <p class="section__text__p1" style="color: white;">Get in Touch</p>
+    <h1 class="title" style="color: white;">Contact Me</h1>
+    <div class="contact-info-upper-container">
+      <div class="contact-info-container">
+        <img
+          src="./assets/email.png"
+          alt="Email icon"
+          class="icon contact-icon email-icon"
+        />
+        <p class="m-0"><a href="mailto:karthikmudike0702@gmail.com">karthikmudike0702&#64;gmail.com</a></p>
+      </div>
+      <div class="contact-info-container">
+        <img
+          src="./assets/linkedin.png"
+          alt="LinkedIn icon"
+          class="icon contact-icon"
+        />
+        <p class="m-0"><a href="https://www.linkedin.com/in/
+          karthik-720132322">LinkedIn</a></p>
+      </div>
+      <div class="contact-info-container">
+        <img
+          src="./assets/world.png"
+          alt="Email icon"
+          class="icon contact-icon"
+        />
+        <p class="m-0"><a href="https://karthikmudike.github.io/My-Portfolio/">My Website</a></p>
+      </div>
+    </div>
+    <footer>
+      <p class="m-0">Copyright &#169; 2025 Karthik M. All Rights Reserved.</p>
+    </footer>
+  </section>
+</body>
